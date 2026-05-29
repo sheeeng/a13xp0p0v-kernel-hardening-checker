@@ -262,6 +262,9 @@ class TestEngine(unittest.TestCase):
         config_checklist += [SysctlCheck('reason_13', 'decision_13', 'name_13', '*expected_13*')]
         config_checklist += [SysctlCheck('reason_14', 'decision_14', 'name_14', '*expected_14*')]
         config_checklist += [SysctlCheck('reason_15', 'decision_15', 'name_15', '*expected_15*')]
+        config_checklist += [SysctlCheck('reason_16', 'decision_16', 'name_16', '')]
+        config_checklist += [SysctlCheck('reason_17', 'decision_17', 'name_17', '')]
+        config_checklist += [SysctlCheck('reason_18', 'decision_18', 'name_18', '')]
 
         # 2. prepare the parsed sysctl options
         parsed_sysctl_options = {}
@@ -275,6 +278,8 @@ class TestEngine(unittest.TestCase):
         parsed_sysctl_options['name_12'] = 'really_not_off,something'
         parsed_sysctl_options['name_13'] = '"expected_13,something,UNexpected2"'
         parsed_sysctl_options['name_14'] = 'UNexpected_14,something'
+        parsed_sysctl_options['name_16'] = ''
+        parsed_sysctl_options['name_17'] = 'not_empty'
 
         # 3. run the engine
         self.run_engine(config_checklist, None, None, parsed_sysctl_options, None)
@@ -298,7 +303,10 @@ class TestEngine(unittest.TestCase):
                  {'option_name': 'name_12', 'type': 'sysctl', 'reason': 'reason_12', 'decision': 'decision_12', 'desired_val': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
                  {'option_name': 'name_13', 'type': 'sysctl', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
                  {'option_name': 'name_14', 'type': 'sysctl', 'reason': 'reason_14', 'decision': 'decision_14', 'desired_val': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
-                 {'option_name': 'name_15', 'type': 'sysctl', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
+                 {'option_name': 'name_15', 'type': 'sysctl', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
+                 {'option_name': 'name_16', 'type': 'sysctl', 'reason': 'reason_16', 'decision': 'decision_16', 'desired_val': '', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_17', 'type': 'sysctl', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': '', 'check_result': 'FAIL: "not_empty"', 'check_result_bool': False},
+                 {'option_name': 'name_18', 'type': 'sysctl', 'reason': 'reason_18', 'decision': 'decision_18', 'desired_val': '', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
         )
 
     def test_complex_or(self) -> None:
