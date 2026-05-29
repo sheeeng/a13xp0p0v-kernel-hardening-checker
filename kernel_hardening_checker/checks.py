@@ -835,6 +835,7 @@ def add_cmdline_checks(l: list[ChecklistObjType], arch: str) -> None:
     l += [CmdlineCheck('cut_attack_surface', 'grapheneos', 'sysrq_always_enabled', 'is not set')]
 
     # 'cut_attack_surface', 'a13xp0p0v'
+    l += [CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present')]
     l += [OR(CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'bdev_allow_write_mounted', '0'),
              AND(KconfigCheck('cut_attack_surface', 'a13xp0p0v', 'BLK_DEV_WRITE_MOUNTED', 'is not set'),
                  CmdlineCheck('-', '-', 'bdev_allow_write_mounted', 'is not set')))]
@@ -967,10 +968,12 @@ def add_sysctl_checks(l: list[ChecklistObjType], arch: StrOrNone) -> None:
              # at first, it disabled unprivileged userfaultfd,
              # and since v5.11 it enables unprivileged userfaultfd for user-mode only
     l += [OR(SysctlCheck('cut_attack_surface', 'kspp', 'kernel.modules_disabled', '1'),
+             CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
              AND(KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'),
                  have_kconfig))]
-             # kernel.modules_disabled=1 should be set (e.g. with systemd) after
-             # the kernel startup, when all the required modules have loaded
+             # block all module loading: kernel.modules_disabled=1 (set after the
+             # needed modules have loaded, e.g. with systemd) or the nomodule
+             # cmdline param; both use the same modules_disabled flag
 
     # 'cut_attack_surface', 'grsec'
     l += [OR(SysctlCheck('cut_attack_surface', 'grsec', 'kernel.io_uring_disabled', '2'),
