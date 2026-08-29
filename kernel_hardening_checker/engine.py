@@ -62,10 +62,10 @@ class OptCheck:
                f'invalid reason "{reason}" for "{name}" check'
         self.reason = reason
 
-        assert (expected and isinstance(expected, str) and expected == expected.strip()), \
+        assert (isinstance(expected, str) and expected == expected.strip()), \
                f'invalid expected value "{expected}" for "{name}" check (1)'
         val_len = len(expected.split())
-        if val_len != 1:
+        if val_len > 1:
             assert (expected in {'is not set', 'is not off', 'is present'}), \
                    f'invalid expected value "{expected}" for "{name}" check (2)'
         self.expected = expected

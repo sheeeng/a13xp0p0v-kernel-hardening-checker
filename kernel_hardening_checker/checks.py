@@ -835,6 +835,8 @@ def add_cmdline_checks(l: list[ChecklistObjType], arch: str) -> None:
     l += [CmdlineCheck('cut_attack_surface', 'grapheneos', 'sysrq_always_enabled', 'is not set')]
 
     # 'cut_attack_surface', 'a13xp0p0v'
+    l += [OR(CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
+             KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'))]
     l += [OR(CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'bdev_allow_write_mounted', '0'),
              AND(KconfigCheck('cut_attack_surface', 'a13xp0p0v', 'BLK_DEV_WRITE_MOUNTED', 'is not set'),
                  CmdlineCheck('-', '-', 'bdev_allow_write_mounted', 'is not set')))]
@@ -967,10 +969,23 @@ def add_sysctl_checks(l: list[ChecklistObjType], arch: StrOrNone) -> None:
              # at first, it disabled unprivileged userfaultfd,
              # and since v5.11 it enables unprivileged userfaultfd for user-mode only
     l += [OR(SysctlCheck('cut_attack_surface', 'kspp', 'kernel.modules_disabled', '1'),
+             CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
              AND(KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'),
                  have_kconfig))]
-             # kernel.modules_disabled=1 should be set (e.g. with systemd) after
-             # the kernel startup, when all the required modules have loaded
+             # block loading kernel modules:
+             #  - set kernel.modules_disabled=1 (e.g. with systemd) after
+             #    the kernel startup, when the needed modules have been loaded
+             #  - or set the nomodule cmdline parameter (it uses the same
+             #    modules_disabled flag)
+    l += [OR(SysctlCheck('cut_attack_surface', 'a13xp0p0v', 'kernel.modprobe', ''),
+             SysctlCheck('cut_attack_surface', 'kspp', 'kernel.modules_disabled', '1'),
+             CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
+             AND(KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'),
+                 have_kconfig))]
+             # disable kernel-requested module autoloading: an empty kernel.modprobe
+             # makes __request_module() bail out before the usermode helper, but it
+             # doesn't prevent explicit modprobe/insmod; the stronger
+             # modules_disabled=1 / nomodule / MODULES=n disable all module loading
 
     # 'cut_attack_surface', 'grsec'
     l += [OR(SysctlCheck('cut_attack_surface', 'grsec', 'kernel.io_uring_disabled', '2'),
