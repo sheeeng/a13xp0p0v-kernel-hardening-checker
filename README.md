@@ -139,7 +139,7 @@ $ ./bin/kernel-hardening-checker -a
 [+] Detected compiler: GCC 130200
 [!] WARNING: sysctl options available for root are not found in /tmp/sysctl-at_0n9si, try checking the output of "sudo sysctl -a"
 =========================================================================================================================
-             option_name              | type  |      reason      | decision |desired_val | check_result
+             option_name              | type  |      reason      | decision |  expected  | check_result
 =========================================================================================================================
 CONFIG_BUG                            |kconfig| self_protection  |defconfig |     y      | OK
 CONFIG_SLUB_DEBUG                     |kconfig| self_protection  |defconfig |     y      | OK

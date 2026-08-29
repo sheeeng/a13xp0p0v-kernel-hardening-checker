@@ -147,7 +147,7 @@ class OptCheck:
             'type': self.opt_type,
             'reason': self.reason,
             'decision': self.decision,
-            'desired_val': self.expected,
+            'expected': self.expected,
         }  # type: dict[str, StrOrBool]
         if with_results:
             assert (self.result), f'unexpected empty result in {self.name}'
@@ -455,7 +455,7 @@ def table_header_print(with_results: bool) -> None:
     print(f'{"type":^{COLUMN_WIDTH[1]}}|', end='')
     print(f'{"reason":^{COLUMN_WIDTH[2]}}|', end='')
     print(f'{"decision":^{COLUMN_WIDTH[3]}}|', end='')
-    print(f'{"desired_val":^{COLUMN_WIDTH[4]}}', end='')
+    print(f'{"expected":^{COLUMN_WIDTH[4]}}', end='')
     if with_results:
         print('| check_result', end='')
     print()

@@ -170,21 +170,21 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_2', 'type': 'kconfig', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_6', 'type': 'kconfig', 'reason': 'reason_6', 'decision': 'decision_6', 'desired_val': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'is not off', 'check_result': 'OK: is not off (really_not_off)', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_8', 'type': 'kconfig', 'reason': 'reason_8', 'decision': 'decision_8', 'desired_val': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_10', 'type': 'kconfig', 'reason': 'reason_10', 'decision': 'decision_10', 'desired_val': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_12', 'type': 'kconfig', 'reason': 'reason_12', 'decision': 'decision_12', 'desired_val': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_14', 'type': 'kconfig', 'reason': 'reason_14', 'decision': 'decision_14', 'desired_val': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_2', 'type': 'kconfig', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_6', 'type': 'kconfig', 'reason': 'reason_6', 'decision': 'decision_6', 'expected': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'is not off', 'check_result': 'OK: is not off (really_not_off)', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_8', 'type': 'kconfig', 'reason': 'reason_8', 'decision': 'decision_8', 'expected': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'expected': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_10', 'type': 'kconfig', 'reason': 'reason_10', 'decision': 'decision_10', 'expected': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'expected': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_12', 'type': 'kconfig', 'reason': 'reason_12', 'decision': 'decision_12', 'expected': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'expected': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_14', 'type': 'kconfig', 'reason': 'reason_14', 'decision': 'decision_14', 'expected': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'expected': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
         )
 
     def test_simple_cmdline(self) -> None:
@@ -227,21 +227,21 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'name_1', 'type': 'cmdline', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
-                 {'option_name': 'name_3', 'type': 'cmdline', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
-                 {'option_name': 'name_4', 'type': 'cmdline', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
-                 {'option_name': 'name_5', 'type': 'cmdline', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
-                 {'option_name': 'name_6', 'type': 'cmdline', 'reason': 'reason_6', 'decision': 'decision_6', 'desired_val': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
-                 {'option_name': 'name_7', 'type': 'cmdline', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'is not off', 'check_result': 'OK: is not off ()', 'check_result_bool': True},
-                 {'option_name': 'name_8', 'type': 'cmdline', 'reason': 'reason_8', 'decision': 'decision_8', 'desired_val': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
-                 {'option_name': 'name_9', 'type': 'cmdline', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
-                 {'option_name': 'name_10', 'type': 'cmdline', 'reason': 'reason_10', 'decision': 'decision_10', 'desired_val': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
-                 {'option_name': 'name_11', 'type': 'cmdline', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
-                 {'option_name': 'name_12', 'type': 'cmdline', 'reason': 'reason_12', 'decision': 'decision_12', 'desired_val': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
-                 {'option_name': 'name_13', 'type': 'cmdline', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
-                 {'option_name': 'name_14', 'type': 'cmdline', 'reason': 'reason_14', 'decision': 'decision_14', 'desired_val': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
-                 {'option_name': 'name_15', 'type': 'cmdline', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
+                [{'option_name': 'name_1', 'type': 'cmdline', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
+                 {'option_name': 'name_3', 'type': 'cmdline', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
+                 {'option_name': 'name_4', 'type': 'cmdline', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
+                 {'option_name': 'name_5', 'type': 'cmdline', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
+                 {'option_name': 'name_6', 'type': 'cmdline', 'reason': 'reason_6', 'decision': 'decision_6', 'expected': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
+                 {'option_name': 'name_7', 'type': 'cmdline', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'is not off', 'check_result': 'OK: is not off ()', 'check_result_bool': True},
+                 {'option_name': 'name_8', 'type': 'cmdline', 'reason': 'reason_8', 'decision': 'decision_8', 'expected': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
+                 {'option_name': 'name_9', 'type': 'cmdline', 'reason': 'reason_9', 'decision': 'decision_9', 'expected': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
+                 {'option_name': 'name_10', 'type': 'cmdline', 'reason': 'reason_10', 'decision': 'decision_10', 'expected': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
+                 {'option_name': 'name_11', 'type': 'cmdline', 'reason': 'reason_11', 'decision': 'decision_11', 'expected': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
+                 {'option_name': 'name_12', 'type': 'cmdline', 'reason': 'reason_12', 'decision': 'decision_12', 'expected': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
+                 {'option_name': 'name_13', 'type': 'cmdline', 'reason': 'reason_13', 'decision': 'decision_13', 'expected': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
+                 {'option_name': 'name_14', 'type': 'cmdline', 'reason': 'reason_14', 'decision': 'decision_14', 'expected': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
+                 {'option_name': 'name_15', 'type': 'cmdline', 'reason': 'reason_15', 'decision': 'decision_15', 'expected': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
         )
 
     def test_simple_sysctl(self) -> None:
@@ -289,24 +289,24 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'name_1', 'type': 'sysctl', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_2', 'type': 'sysctl', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
-                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
-                 {'option_name': 'name_4', 'type': 'sysctl', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
-                 {'option_name': 'name_5', 'type': 'sysctl', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
-                 {'option_name': 'name_6', 'type': 'sysctl', 'reason': 'reason_6', 'decision': 'decision_6', 'desired_val': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
-                 {'option_name': 'name_7', 'type': 'sysctl', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'is not off', 'check_result': 'OK: is not off ()', 'check_result_bool': True},
-                 {'option_name': 'name_8', 'type': 'sysctl', 'reason': 'reason_8', 'decision': 'decision_8', 'desired_val': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
-                 {'option_name': 'name_9', 'type': 'sysctl', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
-                 {'option_name': 'name_10', 'type': 'sysctl', 'reason': 'reason_10', 'decision': 'decision_10', 'desired_val': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
-                 {'option_name': 'name_11', 'type': 'sysctl', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
-                 {'option_name': 'name_12', 'type': 'sysctl', 'reason': 'reason_12', 'decision': 'decision_12', 'desired_val': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
-                 {'option_name': 'name_13', 'type': 'sysctl', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
-                 {'option_name': 'name_14', 'type': 'sysctl', 'reason': 'reason_14', 'decision': 'decision_14', 'desired_val': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
-                 {'option_name': 'name_15', 'type': 'sysctl', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
-                 {'option_name': 'name_16', 'type': 'sysctl', 'reason': 'reason_16', 'decision': 'decision_16', 'desired_val': '', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_17', 'type': 'sysctl', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': '', 'check_result': 'FAIL: "not_empty"', 'check_result_bool': False},
-                 {'option_name': 'name_18', 'type': 'sysctl', 'reason': 'reason_18', 'decision': 'decision_18', 'desired_val': '', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
+                [{'option_name': 'name_1', 'type': 'sysctl', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_2', 'type': 'sysctl', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: "UNexpected_2"', 'check_result_bool': False},
+                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
+                 {'option_name': 'name_4', 'type': 'sysctl', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'is not set', 'check_result': 'OK: is not found', 'check_result_bool': True},
+                 {'option_name': 'name_5', 'type': 'sysctl', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'is present', 'check_result': 'OK: is present', 'check_result_bool': True},
+                 {'option_name': 'name_6', 'type': 'sysctl', 'reason': 'reason_6', 'decision': 'decision_6', 'expected': 'is present', 'check_result': 'FAIL: is not present', 'check_result_bool': False},
+                 {'option_name': 'name_7', 'type': 'sysctl', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'is not off', 'check_result': 'OK: is not off ()', 'check_result_bool': True},
+                 {'option_name': 'name_8', 'type': 'sysctl', 'reason': 'reason_8', 'decision': 'decision_8', 'expected': 'is not off', 'check_result': 'FAIL: is off', 'check_result_bool': False},
+                 {'option_name': 'name_9', 'type': 'sysctl', 'reason': 'reason_9', 'decision': 'decision_9', 'expected': 'is not off', 'check_result': 'FAIL: is off (0)', 'check_result_bool': False},
+                 {'option_name': 'name_10', 'type': 'sysctl', 'reason': 'reason_10', 'decision': 'decision_10', 'expected': 'is not off', 'check_result': 'FAIL: is off, not found', 'check_result_bool': False},
+                 {'option_name': 'name_11', 'type': 'sysctl', 'reason': 'reason_11', 'decision': 'decision_11', 'expected': 'is not off', 'check_result': 'FAIL: is off ("something,off")', 'check_result_bool': False},
+                 {'option_name': 'name_12', 'type': 'sysctl', 'reason': 'reason_12', 'decision': 'decision_12', 'expected': 'is not off', 'check_result': 'OK: is not off (really_not_off,something)', 'check_result_bool': True},
+                 {'option_name': 'name_13', 'type': 'sysctl', 'reason': 'reason_13', 'decision': 'decision_13', 'expected': '*expected_13*', 'check_result': 'OK: in "expected_13,something,UNexpected2"', 'check_result_bool': True},
+                 {'option_name': 'name_14', 'type': 'sysctl', 'reason': 'reason_14', 'decision': 'decision_14', 'expected': '*expected_14*', 'check_result': 'FAIL: not in UNexpected_14,something', 'check_result_bool': False},
+                 {'option_name': 'name_15', 'type': 'sysctl', 'reason': 'reason_15', 'decision': 'decision_15', 'expected': '*expected_15*', 'check_result': 'FAIL: is not found', 'check_result_bool': False},
+                 {'option_name': 'name_16', 'type': 'sysctl', 'reason': 'reason_16', 'decision': 'decision_16', 'expected': '', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_17', 'type': 'sysctl', 'reason': 'reason_17', 'decision': 'decision_17', 'expected': '', 'check_result': 'FAIL: "not_empty"', 'check_result_bool': False},
+                 {'option_name': 'name_18', 'type': 'sysctl', 'reason': 'reason_18', 'decision': 'decision_18', 'expected': '', 'check_result': 'FAIL: is not found', 'check_result_bool': False}],
         )
 
     def test_complex_or(self) -> None:
@@ -358,15 +358,15 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'OK: CONFIG_NAME_4 is "expected_4"', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'expected_5', 'check_result': 'FAIL: "UNexpected_5"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'expected_7', 'check_result': 'OK: CONFIG_NAME_8 is not found', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'expected_9', 'check_result': 'OK: CONFIG_NAME_10 is present', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'expected_11', 'check_result': 'OK: CONFIG_NAME_12 is not off', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': 'expected_13', 'check_result': 'OK: "expected_14" is in CONFIG_NAME_14', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': 'expected_15', 'check_result': 'OK: "expected_16" is in CONFIG_NAME_16', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': 'expected_17', 'check_result': 'OK: name_18 is ""', 'check_result_bool': True}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'OK: CONFIG_NAME_4 is "expected_4"', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'expected_5', 'check_result': 'FAIL: "UNexpected_5"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'expected_7', 'check_result': 'OK: CONFIG_NAME_8 is not found', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'expected': 'expected_9', 'check_result': 'OK: CONFIG_NAME_10 is present', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'expected': 'expected_11', 'check_result': 'OK: CONFIG_NAME_12 is not off', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'expected': 'expected_13', 'check_result': 'OK: "expected_14" is in CONFIG_NAME_14', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'expected': 'expected_15', 'check_result': 'OK: "expected_16" is in CONFIG_NAME_16', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'expected': 'expected_17', 'check_result': 'OK: name_18 is ""', 'check_result_bool': True}],
         )
 
     def test_complex_and(self) -> None:
@@ -425,17 +425,17 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: CONFIG_NAME_4 is not "expected_4"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'expected_5', 'check_result': 'FAIL: "UNexpected_5"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'expected_7', 'check_result': 'FAIL: CONFIG_NAME_8 is not present', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'expected_9', 'check_result': 'FAIL: CONFIG_NAME_10 is off, not found', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'expected_11', 'check_result': 'FAIL: CONFIG_NAME_12 is off', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': 'expected_13', 'check_result': 'FAIL: CONFIG_NAME_14 is off', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': 'expected_15', 'check_result': 'FAIL: CONFIG_NAME_16 is off', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': 'expected_17', 'check_result': 'FAIL: "expected_18" is not in CONFIG_NAME_18', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_19', 'type': 'kconfig', 'reason': 'reason_19', 'decision': 'decision_19', 'desired_val': 'expected_19', 'check_result': 'FAIL: "expected_20" is not in CONFIG_NAME_20', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_21', 'type': 'kconfig', 'reason': 'reason_21', 'decision': 'decision_21', 'desired_val': 'expected_21', 'check_result': 'FAIL: name_22 is not ""', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: CONFIG_NAME_4 is not "expected_4"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'expected_5', 'check_result': 'FAIL: "UNexpected_5"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'expected_7', 'check_result': 'FAIL: CONFIG_NAME_8 is not present', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'expected': 'expected_9', 'check_result': 'FAIL: CONFIG_NAME_10 is off, not found', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'expected': 'expected_11', 'check_result': 'FAIL: CONFIG_NAME_12 is off', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'expected': 'expected_13', 'check_result': 'FAIL: CONFIG_NAME_14 is off', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'expected': 'expected_15', 'check_result': 'FAIL: CONFIG_NAME_16 is off', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'expected': 'expected_17', 'check_result': 'FAIL: "expected_18" is not in CONFIG_NAME_18', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_19', 'type': 'kconfig', 'reason': 'reason_19', 'decision': 'decision_19', 'expected': 'expected_19', 'check_result': 'FAIL: "expected_20" is not in CONFIG_NAME_20', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_21', 'type': 'kconfig', 'reason': 'reason_21', 'decision': 'decision_21', 'expected': 'expected_21', 'check_result': 'FAIL: name_22 is not ""', 'check_result_bool': False}],
         )
 
     def test_complex_nested(self) -> None:
@@ -477,10 +477,10 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'expected_4', 'check_result': 'FAIL: CONFIG_NAME_5 is not "expected_5"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'expected_7', 'check_result': 'OK: CONFIG_NAME_8 is "expected_8"', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_10', 'type': 'kconfig', 'reason': 'reason_10', 'decision': 'decision_10', 'desired_val': 'expected_10', 'check_result': 'FAIL: "UNexpected_10"', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'expected_4', 'check_result': 'FAIL: CONFIG_NAME_5 is not "expected_5"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'expected_7', 'check_result': 'OK: CONFIG_NAME_8 is "expected_8"', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_10', 'type': 'kconfig', 'reason': 'reason_10', 'decision': 'decision_10', 'expected': 'expected_10', 'check_result': 'FAIL: "UNexpected_10"', 'check_result_bool': False}],
         )
 
     def test_version(self) -> None:
@@ -516,12 +516,12 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK: version >= (41, 101, 0)', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_2', 'type': 'kconfig', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: version < (43, 1, 0)', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'OK: version >= (42, 42, 101)', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'expected_4', 'check_result': 'FAIL: version < (42, 44, 1)', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'desired_val': 'expected_5', 'check_result': 'OK: version >= (42, 43, 44)', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_6', 'type': 'kconfig', 'reason': 'reason_6', 'decision': 'decision_6', 'desired_val': 'expected_6', 'check_result': 'FAIL: version < (42, 43, 45)', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK: version >= (41, 101, 0)', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_2', 'type': 'kconfig', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: version < (43, 1, 0)', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'OK: version >= (42, 42, 101)', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'expected_4', 'check_result': 'FAIL: version < (42, 44, 1)', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_5', 'type': 'kconfig', 'reason': 'reason_5', 'decision': 'decision_5', 'expected': 'expected_5', 'check_result': 'OK: version >= (42, 43, 44)', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_6', 'type': 'kconfig', 'reason': 'reason_6', 'decision': 'decision_6', 'expected': 'expected_6', 'check_result': 'FAIL: version < (42, 43, 45)', 'check_result_bool': False}],
         )
 
     def test_stdout(self) -> None:
@@ -565,10 +565,10 @@ class TestEngine(unittest.TestCase):
         self.get_engine_result(config_checklist, json_result, 'json')
         self.assertEqual(
                 json_result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'OK: name_2 is "expected_2"', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'desired_val': 'expected_4', 'check_result': 'FAIL: name_5 is not "expected_5"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'desired_val': 'expected_7', 'check_result': 'FAIL: version < (42, 43, 44)', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_8', 'type': 'kconfig', 'reason': 'reason_8', 'decision': 'decision_8', 'desired_val': 'expected_8', 'check_result': 'OK: name_9 is "expected_9"', 'check_result_bool': True}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'OK: name_2 is "expected_2"', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_4', 'type': 'kconfig', 'reason': 'reason_4', 'decision': 'decision_4', 'expected': 'expected_4', 'check_result': 'FAIL: name_5 is not "expected_5"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_7', 'type': 'kconfig', 'reason': 'reason_7', 'decision': 'decision_7', 'expected': 'expected_7', 'check_result': 'FAIL: version < (42, 43, 44)', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_8', 'type': 'kconfig', 'reason': 'reason_8', 'decision': 'decision_8', 'expected': 'expected_8', 'check_result': 'OK: name_9 is "expected_9"', 'check_result_bool': True}],
         )
 
         stdout_result = []  # type: ResultType
@@ -632,9 +632,9 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'FAIL: "expected_1_new"', 'check_result_bool': False},
-                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: "expected_2_new"', 'check_result_bool': False},
-                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'FAIL: "expected_1_new"', 'check_result_bool': False},
+                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: "expected_2_new"', 'check_result_bool': False},
+                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
         )
 
         # 7. override expected value and perform the checks again
@@ -646,9 +646,9 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2', 'check_result': 'FAIL: "expected_2_new"', 'check_result_bool': False},
-                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2', 'check_result': 'FAIL: "expected_2_new"', 'check_result_bool': False},
+                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
         )
 
         # 9. override expected value and perform the checks again
@@ -660,9 +660,9 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
         )
 
         # 11. override expected value and perform the checks again
@@ -674,9 +674,9 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'desired_val': 'expected_2_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3_new', 'check_result': 'OK', 'check_result_bool': True}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_2', 'type': 'cmdline', 'reason': 'reason_2', 'decision': 'decision_2', 'expected': 'expected_2_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'name_3', 'type': 'sysctl', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3_new', 'check_result': 'OK', 'check_result_bool': True}],
         )
 
     def test_complex_value_overriding(self) -> None:
@@ -704,8 +704,8 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1', 'check_result': 'FAIL: "expected_1_new"', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1', 'check_result': 'FAIL: "expected_1_new"', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3', 'check_result': 'FAIL: "expected_3_new"', 'check_result_bool': False}],
         )
 
         # 6. override expected value and perform the checks again
@@ -718,8 +718,8 @@ CONFIG_NAME_8                         |kconfig|     reason_8     |decision_8| ex
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
                 result,
-                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'desired_val': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'desired_val': 'expected_3_new', 'check_result': 'OK', 'check_result_bool': True}],
+                [{'option_name': 'CONFIG_NAME_1', 'type': 'kconfig', 'reason': 'reason_1', 'decision': 'decision_1', 'expected': 'expected_1_new', 'check_result': 'OK', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_3', 'type': 'kconfig', 'reason': 'reason_3', 'decision': 'decision_3', 'expected': 'expected_3_new', 'check_result': 'OK', 'check_result_bool': True}],
         )
 
     def test_print_unknown_options_simple(self) -> None:
