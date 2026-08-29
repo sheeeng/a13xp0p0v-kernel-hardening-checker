@@ -328,6 +328,8 @@ class TestEngine(unittest.TestCase):
                                 KconfigCheck('reason_14', 'decision_14', 'NAME_14', '*expected_14*'))]
         config_checklist += [OR(KconfigCheck('reason_15', 'decision_15', 'NAME_15', 'expected_15'),
                                 KconfigCheck('reason_16', 'decision_16', 'NAME_16', '*expected_16*'))]
+        config_checklist += [OR(KconfigCheck('reason_17', 'decision_17', 'NAME_17', 'expected_17'),
+                                SysctlCheck('reason_18', 'decision_18', 'name_18', ''))]  # special check for empty value
 
         # 2. prepare the parsed kconfig options
         parsed_kconfig_options = {}
@@ -344,10 +346,14 @@ class TestEngine(unittest.TestCase):
         parsed_kconfig_options['CONFIG_NAME_15'] = 'UNexpected_15'
         parsed_kconfig_options['CONFIG_NAME_16'] = 'UNexpected_16,something,expected_16'
 
-        # 3. run the engine
-        self.run_engine(config_checklist, parsed_kconfig_options, None, None, None)
+        # 3. prepare the parsed sysctl options
+        parsed_sysctl_options = {}
+        parsed_sysctl_options['name_18'] = ''
 
-        # 4. check that the results are correct
+        # 4. run the engine
+        self.run_engine(config_checklist, parsed_kconfig_options, None, parsed_sysctl_options, None)
+
+        # 5. check that the results are correct
         result = []  # type: ResultType
         self.get_engine_result(config_checklist, result, 'json')
         self.assertEqual(
@@ -359,7 +365,8 @@ class TestEngine(unittest.TestCase):
                  {'option_name': 'CONFIG_NAME_9', 'type': 'kconfig', 'reason': 'reason_9', 'decision': 'decision_9', 'desired_val': 'expected_9', 'check_result': 'OK: CONFIG_NAME_10 is present', 'check_result_bool': True},
                  {'option_name': 'CONFIG_NAME_11', 'type': 'kconfig', 'reason': 'reason_11', 'decision': 'decision_11', 'desired_val': 'expected_11', 'check_result': 'OK: CONFIG_NAME_12 is not off', 'check_result_bool': True},
                  {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': 'expected_13', 'check_result': 'OK: "expected_14" is in CONFIG_NAME_14', 'check_result_bool': True},
-                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': 'expected_15', 'check_result': 'OK: "expected_16" is in CONFIG_NAME_16', 'check_result_bool': True}],
+                 {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': 'expected_15', 'check_result': 'OK: "expected_16" is in CONFIG_NAME_16', 'check_result_bool': True},
+                 {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': 'expected_17', 'check_result': 'OK: name_18 is ""', 'check_result_bool': True}],
         )
 
     def test_complex_and(self) -> None:
@@ -385,6 +392,8 @@ class TestEngine(unittest.TestCase):
                                  KconfigCheck('reason_18', 'decision_18', 'NAME_18', '*expected_18*'))]
         config_checklist += [AND(KconfigCheck('reason_19', 'decision_19', 'NAME_19', 'expected_19'),
                                  KconfigCheck('reason_20', 'decision_20', 'NAME_20', '*expected_20*'))]
+        config_checklist += [AND(KconfigCheck('reason_21', 'decision_21', 'NAME_21', 'expected_21'),
+                                 SysctlCheck('reason_22', 'decision_22', 'name_22', ''))]  # special check for empty value
 
         # 2. prepare the parsed kconfig options
         parsed_kconfig_options = {}
@@ -406,6 +415,7 @@ class TestEngine(unittest.TestCase):
         parsed_kconfig_options['CONFIG_NAME_18'] = '"UNexpected_14,something"'
         parsed_kconfig_options['CONFIG_NAME_19'] = 'expected_15'
         parsed_kconfig_options['CONFIG_NAME_20'] = 'UNexpected_16,something'
+        parsed_kconfig_options['CONFIG_NAME_21'] = 'expected_21'
 
         # 3. run the engine
         self.run_engine(config_checklist, parsed_kconfig_options, None, None, None)
@@ -424,7 +434,8 @@ class TestEngine(unittest.TestCase):
                  {'option_name': 'CONFIG_NAME_13', 'type': 'kconfig', 'reason': 'reason_13', 'decision': 'decision_13', 'desired_val': 'expected_13', 'check_result': 'FAIL: CONFIG_NAME_14 is off', 'check_result_bool': False},
                  {'option_name': 'CONFIG_NAME_15', 'type': 'kconfig', 'reason': 'reason_15', 'decision': 'decision_15', 'desired_val': 'expected_15', 'check_result': 'FAIL: CONFIG_NAME_16 is off', 'check_result_bool': False},
                  {'option_name': 'CONFIG_NAME_17', 'type': 'kconfig', 'reason': 'reason_17', 'decision': 'decision_17', 'desired_val': 'expected_17', 'check_result': 'FAIL: "expected_18" is not in CONFIG_NAME_18', 'check_result_bool': False},
-                 {'option_name': 'CONFIG_NAME_19', 'type': 'kconfig', 'reason': 'reason_19', 'decision': 'decision_19', 'desired_val': 'expected_19', 'check_result': 'FAIL: "expected_20" is not in CONFIG_NAME_20', 'check_result_bool': False}],
+                 {'option_name': 'CONFIG_NAME_19', 'type': 'kconfig', 'reason': 'reason_19', 'decision': 'decision_19', 'desired_val': 'expected_19', 'check_result': 'FAIL: "expected_20" is not in CONFIG_NAME_20', 'check_result_bool': False},
+                 {'option_name': 'CONFIG_NAME_21', 'type': 'kconfig', 'reason': 'reason_21', 'decision': 'decision_21', 'desired_val': 'expected_21', 'check_result': 'FAIL: name_22 is not ""', 'check_result_bool': False}],
         )
 
     def test_complex_nested(self) -> None:
