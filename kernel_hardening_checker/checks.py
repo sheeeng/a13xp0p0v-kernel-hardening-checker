@@ -971,9 +971,11 @@ def add_sysctl_checks(l: list[ChecklistObjType], arch: StrOrNone) -> None:
              CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
              AND(KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'),
                  have_kconfig))]
-             # block all module loading: kernel.modules_disabled=1 (set after the
-             # needed modules have loaded, e.g. with systemd) or the nomodule
-             # cmdline param; both use the same modules_disabled flag
+             # block loading kernel modules:
+             #  - set kernel.modules_disabled=1 (e.g. with systemd) after
+             #    the kernel startup, when the needed modules have been loaded
+             #  - or set the nomodule cmdline parameter (it uses the same
+             #    modules_disabled flag)
     l += [OR(SysctlCheck('cut_attack_surface', 'a13xp0p0v', 'kernel.modprobe', ''),
              SysctlCheck('cut_attack_surface', 'kspp', 'kernel.modules_disabled', '1'),
              CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
