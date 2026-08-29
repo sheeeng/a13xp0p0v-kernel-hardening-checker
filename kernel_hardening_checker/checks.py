@@ -835,7 +835,8 @@ def add_cmdline_checks(l: list[ChecklistObjType], arch: str) -> None:
     l += [CmdlineCheck('cut_attack_surface', 'grapheneos', 'sysrq_always_enabled', 'is not set')]
 
     # 'cut_attack_surface', 'a13xp0p0v'
-    l += [CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present')]
+    l += [OR(CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'nomodule', 'is present'),
+             KconfigCheck('cut_attack_surface', 'kspp', 'MODULES', 'is not set'))]
     l += [OR(CmdlineCheck('cut_attack_surface', 'a13xp0p0v', 'bdev_allow_write_mounted', '0'),
              AND(KconfigCheck('cut_attack_surface', 'a13xp0p0v', 'BLK_DEV_WRITE_MOUNTED', 'is not set'),
                  CmdlineCheck('-', '-', 'bdev_allow_write_mounted', 'is not set')))]
